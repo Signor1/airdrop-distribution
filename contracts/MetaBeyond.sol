@@ -142,4 +142,14 @@ contract MetaBeyond {
             revert USER_ENTRY_POINT_REACHED();
         }
     }
+
+    //airdrop distribution method
+    function distributePrize() private {
+        if (winners.length == 20) {
+            // chainlink vrf
+            //IERC20 for transfer
+
+            hasAirdropEnded = true;
+        }
+    }
 }
