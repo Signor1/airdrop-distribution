@@ -11,4 +11,15 @@ error ALREADY_LIKED_OUR_POST();
 error ALREADY_SHARED_OUR_POST();
 error USER_ENTRY_POINT_REACHED();
 
-contract MetaBeyond {}
+contract MetaBeyond {
+    struct Users {
+        uint256 id;
+        address userAdress;
+        bool hasFollowed;
+        bool hasPosted;
+        bool hasLiked;
+        uint256 userPoints;
+        bool hasRegistered;
+        bool entryPointReach;
+    }
+}
