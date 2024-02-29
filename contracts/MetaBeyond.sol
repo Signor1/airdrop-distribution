@@ -39,6 +39,10 @@ contract MetaBeyond {
 
     mapping(address => Users) registeredUsers;
 
+    constructor(address _metaToken) {
+        metaToken = IERC20(_metaToken);
+    }
+
     //registrations
     function register() external {
         if (hasAirdropEnded) {
