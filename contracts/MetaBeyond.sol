@@ -32,4 +32,6 @@ contract MetaBeyond {
     uint8 constant pointforFollow = 20;
     uint8 constant pointforLike = 10;
     uint8 constant pointForPostSharing = 30;
+
+    mapping(address => Users) registeredUsers;
 }
