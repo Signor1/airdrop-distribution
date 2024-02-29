@@ -152,4 +152,11 @@ contract MetaBeyond {
             hasAirdropEnded = true;
         }
     }
+
+    //check whether user is registered
+    function doesUserExist() private view {
+        if (registeredUsers[msg.sender].hasRegistered == false) {
+            revert ONLY_REGISTERED_USER_IS_ALLOWED();
+        }
+    }
 }
