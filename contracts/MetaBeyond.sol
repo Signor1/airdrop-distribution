@@ -126,4 +126,20 @@ contract MetaBeyond {
 
         updateEntryPoints();
     }
+
+    //users entry point update
+    function updateEntryPoints() private {
+        if (registeredUsers[msg.sender].entryPointReach == false) {
+            if (registeredUsers[msg.sender].userPoints == 50) {
+                registeredUsers[msg.sender].entryPointReach = true;
+
+                winners.push(registeredUsers[msg.sender].id);
+
+                //
+                if (winners.length == 20) {}
+            }
+        } else {
+            revert USER_ENTRY_POINT_REACHED();
+        }
+    }
 }
