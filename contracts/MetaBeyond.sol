@@ -34,4 +34,33 @@ contract MetaBeyond {
     uint8 constant pointForPostSharing = 30;
 
     mapping(address => Users) registeredUsers;
+
+    //registrations
+    function register() external {
+        if (hasAirdropEnded) {
+            revert AIRDROP_DISTRIBUTION_HAS_ENDED();
+        }
+        if (msg.sender == address(0)) {
+            revert ZERO_ADDRESS_NOT_ALLOWED();
+        }
+
+        if (registeredUsers[msg.sender].hasRegistered == true) {
+            revert CANNOT_REGISTER_AGAIN();
+        }
+
+        uint256 id = userId + 1;
+
+        registeredUsers[msg.sender] = Users(
+            id,
+            msg.sender,
+            false,
+            false,
+            false,
+            0,
+            true,
+            false
+        );
+
+        userId = id + userId;
+    }
 }
