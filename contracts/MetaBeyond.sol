@@ -43,6 +43,13 @@ contract MetaBeyond {
         metaToken = IERC20(_metaToken);
     }
 
+    //events
+    event UserRegistered(uint256 id, address userAdress);
+    event UserFollowed(uint256 id, address userAdress);
+    event UserLiked(uint256 id, address userAdress);
+    event UserShared(uint256 id, address userAdress);
+    event UserEntryPointReached(uint256 id, address userAdress);
+
     //registrations
     function register() external {
         if (hasAirdropEnded) {
@@ -70,6 +77,8 @@ contract MetaBeyond {
         );
 
         userId = id + userId;
+
+        emit UserRegistered(id, msg.sender);
     }
 
     //follow our page
