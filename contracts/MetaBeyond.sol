@@ -105,4 +105,25 @@ contract MetaBeyond {
 
         updateEntryPoints();
     }
+
+    //share our pinned post
+    function sharePinnedPost() external {
+        if (msg.sender == address(0)) {
+            revert ZERO_ADDRESS_NOT_ALLOWED();
+        }
+
+        doesUserExist();
+
+        if (registeredUsers[msg.sender].hasPosted) {
+            revert ALREADY_SHARED_OUR_POST();
+        }
+
+        registeredUsers[msg.sender].hasPosted = true;
+
+        registeredUsers[msg.sender].userPoints =
+            registeredUsers[msg.sender].userPoints +
+            pointForPostSharing;
+
+        updateEntryPoints();
+    }
 }
