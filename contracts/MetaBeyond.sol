@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
 //custom errors
 error ZERO_ADDRESS_NOT_ALLOWED();
 error CANNOT_REGISTER_AGAIN();
@@ -12,6 +14,8 @@ error ALREADY_SHARED_OUR_POST();
 error USER_ENTRY_POINT_REACHED();
 
 contract MetaBeyond {
+    IERC20 public metaToken;
+
     struct Users {
         uint256 id;
         address userAdress;
