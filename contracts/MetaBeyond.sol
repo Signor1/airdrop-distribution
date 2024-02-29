@@ -22,4 +22,10 @@ contract MetaBeyond {
         bool hasRegistered;
         bool entryPointReach;
     }
+
+    uint256 userId;
+
+    uint256[] winners;
+
+    bool hasAirdropEnded;
 }
