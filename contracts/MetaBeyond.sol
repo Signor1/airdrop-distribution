@@ -84,4 +84,25 @@ contract MetaBeyond {
 
         updateEntryPoints();
     }
+
+    //like our pinned post
+    function likeOurPinnedPost() external {
+        if (msg.sender == address(0)) {
+            revert ZERO_ADDRESS_NOT_ALLOWED();
+        }
+
+        doesUserExist();
+
+        if (registeredUsers[msg.sender].hasLiked) {
+            revert ALREADY_LIKED_OUR_POST();
+        }
+
+        registeredUsers[msg.sender].hasLiked = true;
+
+        registeredUsers[msg.sender].userPoints =
+            registeredUsers[msg.sender].userPoints +
+            pointforLike;
+
+        updateEntryPoints();
+    }
 }
