@@ -28,4 +28,8 @@ contract MetaBeyond {
     uint256[] winners;
 
     bool hasAirdropEnded;
+
+    uint8 constant pointforFollow = 20;
+    uint8 constant pointforLike = 10;
+    uint8 constant pointForPostSharing = 30;
 }
