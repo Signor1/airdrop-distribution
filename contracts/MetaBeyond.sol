@@ -100,6 +100,8 @@ contract MetaBeyond {
             pointforFollow;
 
         updateEntryPoints();
+
+        emit UserFollowed(registeredUsers[msg.sender].id, msg.sender);
     }
 
     //like our pinned post
@@ -121,6 +123,8 @@ contract MetaBeyond {
             pointforLike;
 
         updateEntryPoints();
+
+        emit UserLiked(registeredUsers[msg.sender].id, msg.sender);
     }
 
     //share our pinned post
@@ -142,6 +146,8 @@ contract MetaBeyond {
             pointForPostSharing;
 
         updateEntryPoints();
+
+        emit UserShared(registeredUsers[msg.sender].id, msg.sender);
     }
 
     //users entry point update
@@ -158,6 +164,8 @@ contract MetaBeyond {
         } else {
             revert USER_ENTRY_POINT_REACHED();
         }
+
+        emit UserEntryPointReached(registeredUsers[msg.sender].id, msg.sender);
     }
 
     //airdrop distribution method
