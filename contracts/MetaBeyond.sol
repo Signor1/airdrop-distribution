@@ -49,6 +49,11 @@ contract MetaBeyond {
     event UserLiked(uint256 id, address userAdress);
     event UserShared(uint256 id, address userAdress);
     event UserEntryPointReached(uint256 id, address userAdress);
+    event DistributionSuccessful(
+        address userAdress,
+        uint256 id,
+        uint256 amount
+    );
 
     //registrations
     function register() external {
