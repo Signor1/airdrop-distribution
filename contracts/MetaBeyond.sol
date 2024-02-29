@@ -10,3 +10,5 @@ error ALREADY_FOLLOWED_OUR_PAGE();
 error ALREADY_LIKED_OUR_POST();
 error ALREADY_SHARED_OUR_POST();
 error USER_ENTRY_POINT_REACHED();
+
+contract MetaBeyond {}
