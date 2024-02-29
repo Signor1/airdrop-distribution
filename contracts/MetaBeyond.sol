@@ -63,4 +63,25 @@ contract MetaBeyond {
 
         userId = id + userId;
     }
+
+    //follow our page
+    function followUs() external {
+        if (msg.sender == address(0)) {
+            revert ZERO_ADDRESS_NOT_ALLOWED();
+        }
+
+        doesUserExist();
+
+        if (registeredUsers[msg.sender].hasFollowed) {
+            revert ALREADY_FOLLOWED_OUR_PAGE();
+        }
+
+        registeredUsers[msg.sender].hasFollowed = true;
+
+        registeredUsers[msg.sender].userPoints =
+            registeredUsers[msg.sender].userPoints +
+            pointforFollow;
+
+        updateEntryPoints();
+    }
 }
