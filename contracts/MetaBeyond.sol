@@ -220,6 +220,26 @@ contract MetaBeyond is VRFConsumerBaseV2 {
         }
     }
 
+    //getting the request id
+    function getRequestId() private returns (uint256 requestId) {
+        // chainlink vrf
+        requestId = COORDINATOR.requestRandomWords(
+            keyHash,
+            subscriptionId,
+            requestConfirmations,
+            callbackGasLimit,
+            numWords
+        );
+
+        RequestStatus storage requestStatus = requests[requestId];
+        requestStatus.exists = true;
+
+        requestIds.push(requestId);
+        lastRequestId = requestId;
+
+        return requestId;
+    }
+
     //check whether user is registered
     function doesUserExist() private view {
         if (registeredUsers[msg.sender].hasRegistered == false) {
