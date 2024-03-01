@@ -15,7 +15,10 @@ error ALREADY_LIKED_OUR_POST();
 error ALREADY_SHARED_OUR_POST();
 error USER_ENTRY_POINT_REACHED();
 
-contract MetaBeyond {
+contract MetaBeyond is VRFConsumerBaseV2 {
+    //VRF co-ordinator
+    VRFCoordinatorV2Interface COORDINATOR;
+
     IERC20 public metaToken;
 
     struct Users {
