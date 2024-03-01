@@ -70,8 +70,16 @@ contract MetaBeyond is VRFConsumerBaseV2 {
 
     mapping(uint => RequestStatus) requests;
 
-    constructor(address _metaToken) {
+    constructor(
+        uint64 _subscriptionId,
+        address _metaToken
+    ) VRFConsumerBaseV2(0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625) {
         metaToken = IERC20(_metaToken);
+
+        COORDINATOR = VRFCoordinatorV2Interface(
+            0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
+        );
+        subscriptionId = _subscriptionId;
     }
 
     //events
