@@ -44,6 +44,32 @@ contract MetaBeyond is VRFConsumerBaseV2 {
 
     mapping(address => Users) registeredUsers;
 
+    //subscription Id from the VRF
+    uint64 subscriptionId;
+
+    // Array to store past request IDs
+    uint256[] public requestIds;
+    // ID of the last request made for randomness
+    uint256 public lastRequestId;
+
+    // Key hash used for Chainlink VRF
+    bytes32 keyHash =
+        0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
+
+    // Number of confirmations required for a randomness request
+    uint16 requestConfirmations;
+
+    uint32 numWords = 5; // Number of random words to be generated
+    uint32 callbackGasLimit = 400000;
+
+    struct RequestStatus {
+        bool fulfilled; // Whether the request has been successfully fulfilled
+        bool exists; // Whether a requestId exists
+        uint256[] randomWords; // Array to store the generated random words
+    }
+
+    mapping(uint => RequestStatus) requests;
+
     constructor(address _metaToken) {
         metaToken = IERC20(_metaToken);
     }
