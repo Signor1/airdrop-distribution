@@ -34,7 +34,7 @@ contract MetaBeyond is VRFConsumerBaseV2 {
 
     uint256 userId;
 
-    uint256[] winners;
+    address[] winners;
 
     bool hasAirdropEnded;
 
@@ -88,11 +88,7 @@ contract MetaBeyond is VRFConsumerBaseV2 {
     event UserLiked(uint256 id, address userAdress);
     event UserShared(uint256 id, address userAdress);
     event UserEntryPointReached(uint256 id, address userAdress);
-    event DistributionSuccessful(
-        address userAdress,
-        uint256 id,
-        uint256 amount
-    );
+    event DistributionSuccessful(address userAdress, uint256 amount);
 
     //registrations
     function register() external {
@@ -251,6 +247,23 @@ contract MetaBeyond is VRFConsumerBaseV2 {
         requests[_requestId].randomWords = _randomWords;
 
         shareAirdrop(_requestId);
+    }
+
+    //after the random words are generated, the airdrop is distributed to the randomly chosen winners. Picked (randomly) Winners will recieve the airdrop, the rest of the airdrop (the token) is sent to this contract
+    function shareAirdrop(uint256 _requestId) private {
+        for (uint256 i = 0; i < numWords; i++) {
+            uint256 index = (requests[_requestId].randomWords[i] + i) %
+                winners.length;
+
+            uint amount = registeredUsers[winners[index]].userPoints * 10;
+
+            metaToken.transfer(winners[index], amount);
+
+            emit DistributionSuccessful(winners[index], amount);
+        }
+
+        //after distribution the airdrop ends
+        hasAirdropEnded = true;
     }
 
     //check whether user is registered
