@@ -23,7 +23,7 @@ contract MetaBeyond is VRFConsumerBaseV2 {
 
     struct Users {
         uint256 id;
-        address userAdress;
+        address userAddress;
         bool hasFollowed;
         bool hasPosted;
         bool hasLiked;
@@ -200,10 +200,11 @@ contract MetaBeyond is VRFConsumerBaseV2 {
             if (registeredUsers[msg.sender].userPoints == 50) {
                 registeredUsers[msg.sender].entryPointReach = true;
 
-                winners.push(registeredUsers[msg.sender].id);
+                //inserting the address of users with 50 points or more in the 'winners' array
+                winners.push(registeredUsers[msg.sender].userAddress);
 
-                //
-                if (winners.length == 20) {}
+                //check whether the defined number of winners have been reached, if yes? Get random winners
+                checkAndGetRandomWinners();
             }
         } else {
             revert USER_ENTRY_POINT_REACHED();
@@ -213,12 +214,9 @@ contract MetaBeyond is VRFConsumerBaseV2 {
     }
 
     //airdrop distribution method
-    function distributePrize() private {
+    function checkAndGetRandomWinners() private {
         if (winners.length == 20) {
-            // chainlink vrf
-            //IERC20 for transfer
-
-            hasAirdropEnded = true;
+            getRequestId();
         }
     }
 
