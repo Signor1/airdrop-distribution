@@ -240,6 +240,19 @@ contract MetaBeyond is VRFConsumerBaseV2 {
         return requestId;
     }
 
+    //to be called when the request id is retrieved
+    function fulfillRandomWords(
+        uint256 _requestId,
+        uint256[] memory _randomWords
+    ) internal override {
+        require(requests[_requestId].exists, "Request not found");
+
+        requests[_requestId].fulfilled = true;
+        requests[_requestId].randomWords = _randomWords;
+
+        shareAirdrop(_requestId);
+    }
+
     //check whether user is registered
     function doesUserExist() private view {
         if (registeredUsers[msg.sender].hasRegistered == false) {
